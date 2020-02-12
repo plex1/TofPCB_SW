@@ -13,27 +13,13 @@
 #include <stdio.h>
 
 #include "GepinSlave.h"
+#include "../tof_pcb.h"
 //#define BAUD_RATE_9600_BPS  77 12mhz
 #define BAUD_RATE_9600_BPS  (103/1)
 
 
 // variable list declaration
-typedef struct{
-	uint32_t id;
-	uint32_t pwm_comp_level_1;
-	uint32_t pwm_comp_level_2;
-	uint32_t pwm_v_adj_apd;
-	uint32_t v_5v_sense;
-	uint32_t v_apd_sense;
-	uint32_t v_apd_r_sense;
-	uint32_t v_sipm_sense;
-	uint32_t lockin_1_filt;
-	uint32_t lockin_2_filt;
-	uint32_t lockin_1_peak;
-	uint32_t temperature;
-	uint32_t start_pulses;
-	uint32_t stop_pulses;	
-} __attribute__ ((aligned (4), packed)) var_table_t, *p_var_table_t;
+typedef TofPCB __attribute__ ((aligned (4), packed)) var_table_t, *p_var_table_t;
 
 var_table_t var_table;
 
