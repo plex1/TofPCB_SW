@@ -5,14 +5,16 @@
  * Author : felix
  */ 
 
-#define F_CPU 12000000UL
+//#define F_CPU 12000000UL
+#define F_CPU (16000000UL/1)
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdbool.h>
 #include <stdio.h>
 
 #include "GepinSlave.h"
-#define BAUD_RATE_9600_BPS  77
+//#define BAUD_RATE_9600_BPS  77 12mhz
+#define BAUD_RATE_9600_BPS  (103/1)
 
 
 // variable list declaration
@@ -61,7 +63,7 @@ int main(void)
 
 	int i = 0;
 	unsigned int ubrr = BAUD_RATE_9600_BPS;
-	unsigned char data[] = "Hello from ATmega328p  ";
+	unsigned char data[] = "Hello from ATmega328p   ";
 
 	/* Set Baudrate  */
 	UBRR0H = (ubrr>>8);
@@ -86,7 +88,7 @@ int main(void)
 	
 	// PD6, OC0A
 	DDRD |= (1 << DDD6); // PD6 is now an output
-	var_table.pwm_comp_level_2 = 128;	
+	var_table.pwm_comp_level_2 = 0;	
 	OCR0A = var_table.pwm_comp_level_2; // set PWM for 50% duty cycle
 	TCCR0A |= (1 << COM0A1);// set none-inverting mode
 	TCCR0A |= (1 << WGM01) | (1 << WGM00); // set fast PWM Mode
@@ -94,7 +96,7 @@ int main(void)
 	
 	// PD3, OC2B
 	DDRD |= (1 << DDD3); // PD3 is now an output
-	var_table.pwm_comp_level_1= 128;
+	var_table.pwm_comp_level_1= 0;
 	OCR2B = var_table.pwm_comp_level_1; // set PWM for 50% duty cycle	
 	TCCR2A |= 1<<COM2B1; // set none-inverting mode
 	TCCR2A  |= (1 << WGM10) | (1 << WGM21); // set fast PWM Mode
@@ -102,12 +104,12 @@ int main(void)
 	
 	// PD5, OC0B
 	DDRD |= (1 << DDD5); // PD5 is now an output
-	var_table.pwm_v_adj_apd = 128;
+	var_table.pwm_v_adj_apd = 0;
 	OCR0B  = var_table.pwm_v_adj_apd;
 	TCCR0A |= 1<<COM0B1;
 	
 	// adc init
-	ADMUX = (1<<REFS0)  ; //(1<<REFS0) | (1<<REFS1);     //REFS0: select AVCC as reference
+	ADMUX = (1<<REFS0)  ; //REFS0: select AVCC as reference
 	ADCSRA  = (1<<ADEN) | 7;  //enable and prescale = 128 (16MHz/128 = 125kHz)
 	
 
@@ -115,7 +117,7 @@ int main(void)
 	while (1)
 	{
 		
-		DDRB &= ~(1<<5); // switch of led
+		//DDRB &= ~(1<<5); // switch of led
 		
 		//_delay_ms(1000);
 		//DDRB |= 1<<5; // switch on led
