@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>GccApplication2</AssemblyName>
+    <AssemblyName>GccApplication</AssemblyName>
     <Name>TofPCB_SW</Name>
-    <RootNamespace>GccApplication2</RootNamespace>
+    <RootNamespace>GccApplication</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
